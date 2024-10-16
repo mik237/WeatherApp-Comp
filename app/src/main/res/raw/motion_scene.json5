@@ -1,0 +1,142 @@
+{
+  ConstraintSets: {
+    start: {
+      profile_pic: {
+        width: 40,
+        height: 40,
+        start: [
+          'parent',
+          'start',
+          16
+        ],
+        top: [
+          'parent',
+          'top',
+          16
+        ],
+      },
+      username: {
+        top: [
+          'profile_pic',
+          'top'
+        ],
+        bottom: [
+          'profile_pic',
+          'bottom'
+        ],
+        start: [
+          'profile_pic',
+          'end',
+          16
+        ],
+      },
+      box: {
+        width: 'spread',
+        height: 'spread',
+        top: [
+          'parent',
+          'top'
+        ],
+        end: [
+          'parent',
+          'end'
+        ],
+        bottom: [
+          'parent',
+          'bottom',
+          -16
+        ],
+        start: [
+          'parent',
+          'start'
+        ],
+      }
+    },
+    end: {
+      profile_pic: {
+        width: 150,
+        height: 150,
+        start: [
+          'parent',
+          'start'
+        ],
+        end: [
+          'parent',
+          'end'
+        ],
+        top: [
+          'parent',
+          'top',
+          16
+        ],
+      },
+      username: {
+        top: [
+          'profile_pic',
+          'bottom',
+          16
+        ],
+        start: [
+          'parent',
+          'start',
+          16
+        ],
+        end: [
+          'parent',
+          'end',
+          16
+        ],
+      },
+      box: {
+        width: 'spread',
+        height: 'spread',
+        top: [
+          'parent',
+          'top'
+        ],
+        end: [
+          'parent',
+          'end'
+        ],
+        bottom: [
+          'parent',
+          'bottom',
+          -16
+        ],
+        start: [
+          'parent',
+          'start'
+        ],
+      }
+    }
+  },
+  Transitions: {
+    default: {
+      from: 'start',
+      to: 'end',
+      pathMotionArc: 'startVertical',
+      staggered: 0.4,
+      onSwipe: {
+        anchor: 'box',
+        maxVelocity: 4.2,
+        maxAccel: 3,
+        direction: 'end',
+        side: 'start',
+        mode: 'velocity'
+      },
+      KeyFrames: {
+        KeyAttributes: [
+          {
+            target: [
+              'profile_pic'
+            ],
+            frames: [
+              0,
+              100
+            ],
+          }
+        ],
+      }
+    }
+  }
+}
