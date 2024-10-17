@@ -8,8 +8,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,22 +19,29 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
 import androidx.constraintlayout.compose.MotionScene
+import me.ibrahim.weatherapp_comp.ui.theme.TextColor
 import me.ibrahim.weatherapp_comp.ui.theme.WeatherAppCompTheme
 
 class MainActivity : ComponentActivity() {
@@ -89,7 +98,9 @@ fun WeatherHeader(progress: Float, scrollState: ScrollState) {
     MotionLayout(
         motionScene = MotionScene(content = motionScene),
         progress = progress,
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = Color(0xFFF6EDFF)),
         /*debug = EnumSet.of(MotionLayoutDebugFlags.SHOW_ALL)*/
     ) {
         val boxProperties = motionProperties(id = "box")
@@ -109,6 +120,45 @@ fun WeatherHeader(progress: Float, scrollState: ScrollState) {
                 )
                 .layoutId("bg_image")
         )
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .layoutId("days_selection")
+        ) {
+
+            val daysOptionsList = listOf("Today", "Tomorrow", "10 Days")
+            var selectedIndex by remember { mutableIntStateOf(0) }
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                daysOptionsList.forEachIndexed { index, title ->
+
+                    val bgColor = if (index == selectedIndex) {
+                        Color(0xFFE0B6FF)
+                    } else Color.White
+                    val shape = RoundedCornerShape(30)
+                    Button(
+                        onClick = { selectedIndex = index },
+                        modifier = Modifier
+                            .height(42.dp),
+                        shape = shape,
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = bgColor,
+                            contentColor = TextColor
+                        )
+                    ) {
+                        Text(
+                            text = title,
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 16.sp
+                        )
+                    }
+                }
+            }
+        }
 
         Column(
             modifier = Modifier
