@@ -3,7 +3,7 @@
     start: {
       bg_image: {
         width: 'spread',
-        height: 400,
+        height: 412,
         start: ['parent', 'start', 0],
         end: ['parent', 'end', 0],
         top: ['parent', 'top', 0],
@@ -11,6 +11,12 @@
           bottomStartPercent: 8,
           bottomEndPercent: 8
         }
+      },
+
+      bgCollapsed: {
+        width: 'spread',
+        height: 412,
+        alpha: 0,
       },
 
       box: {
@@ -32,13 +38,61 @@
         end: ['parent', 'end', 0],
         top: ['bg_image', 'bottom', 16],
         bottom: ['box', 'top', 16],
+      },
+
+      toolbar: {
+        width: 'spread',
+        height: 'wrap',
+        start: ['parent', 'start', 16],
+        end: ['parent', 'end', 16],
+        top: ['parent', 'top', 40],
+        custom: {
+          contentColor: '#FFFFFFFF'
+        }
+      },
+
+      txtTemperature: {
+        width: 'wrap',
+        height: 'wrap',
+        start: ['parent', 'start', 16],
+        top: ['toolbar', 'bottom', 0],
+        bottom: ['bg_image', 'bottom', 16],
+        custom: {
+          fontSize: 112
+        }
+      },
+
+      txtDate: {
+        start: ['parent', 'start', 16],
+        bottom: ['bg_image', 'bottom', 16],
+        visibility: 'visible',
+      },
+
+      txtDayNightTemp: {
+        end: ['parent', 'end', 16],
+        bottom: ['bg_image', 'bottom', 16],
+        visibility: 'visible',
+      },
+
+      imgCurrentWeather: {
+        end: ['parent', 'end', 16],
+        top: ['toolbar', 'bottom', 0],
+        bottom: ['bg_image', 'bottom', 16],
+        width: 110,
+        height: 110,
+      },
+
+      txtCurrentTempTitle: {
+        start: ['imgCurrentWeather', 'start', 0],
+        end: ['imgCurrentWeather', 'end', 0],
+        top: ['imgCurrentWeather', 'bottom', 5],
       }
     },
 
     end: {
       bg_image: {
         width: 'spread',
-        height: 156,
+        height: 228,
         start: ['parent', 'start', 0],
         end: ['parent', 'end', 0],
         top: ['parent', 'top', 0],
@@ -47,12 +101,19 @@
           bottomEndPercent: 0
         }
       },
+
+      bgCollapsed: {
+        width: 'spread',
+        height: 228,
+        alpha: 1,
+      },
+
       box: {
         width: 'spread',
         height: 'spread',
         start: ['parent', 'start', 16],
         end: ['parent', 'end', 16],
-        top: ['parent', 'top', 156],
+        top: ['bg_image', 'bottom', 0],
         bottom: ['parent', 'bottom', 16],
         custom: {
           background: '#c0392b'
@@ -64,6 +125,51 @@
         start: ['parent', 'start', 0],
         end: ['parent', 'end', 0],
         bottom: ['bg_image', 'bottom', 10],
+      },
+      toolbar: {
+        width: 'spread',
+        height: 'wrap',
+        start: ['parent', 'start', 16],
+        end: ['parent', 'end', 16],
+        top: ['parent', 'top', 40],
+        custom: {
+          contentColor: '#FF000000'
+        }
+      },
+      txtTemperature: {
+        width: 'wrap',
+        height: 'wrap',
+        start: ['parent', 'start', 16],
+        top: ['toolbar', 'bottom', 0],
+        bottom: ['days_selection', 'top', 0],
+        custom: {
+          fontSize: 56
+        }
+      },
+
+      txtDate: {
+        start: ['parent', 'start', 16],
+        bottom: ['bg_image', 'bottom', 16],
+        visibility: 'gone',
+      },
+      txtDayNightTemp: {
+        end: ['parent', 'end', 16],
+        bottom: ['bg_image', 'bottom', 16],
+        visibility: 'gone',
+      },
+      imgCurrentWeather: {
+        end: ['parent', 'end', 16],
+        top: ['toolbar', 'bottom', 0],
+        bottom: ['days_selection', 'top', 0],
+        width: 60,
+        height: 60
+      },
+
+      txtCurrentTempTitle: {
+        start: ['imgCurrentWeather', 'start', 0],
+        end: ['imgCurrentWeather', 'end', 0],
+        top: ['imgCurrentWeather', 'bottom', 5],
+        visibility: 'gone',
       }
     }
   },
@@ -73,6 +179,11 @@
       from: 'start',
       to: 'end',
       KeyFrames: {
+        KeyAttributes: [{
+//          target: ['bgCollapsed'],
+//          frames: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+//          alpha: [0, 0, 0, 0, 0, 0, 0.2, 0.4, 0.6, 0.8, 1],
+        }],
         /*KeyAttributes: [
           {
             target: ['bg_image'],
