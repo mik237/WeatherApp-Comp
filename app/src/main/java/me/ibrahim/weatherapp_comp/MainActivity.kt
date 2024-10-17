@@ -131,8 +131,10 @@ fun WeatherHeader(progress: Float, scrollState: ScrollState) {
             var selectedIndex by remember { mutableIntStateOf(0) }
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 daysOptionsList.forEachIndexed { index, title ->
 
@@ -143,6 +145,7 @@ fun WeatherHeader(progress: Float, scrollState: ScrollState) {
                     Button(
                         onClick = { selectedIndex = index },
                         modifier = Modifier
+                            .weight(1f)
                             .height(42.dp),
                         shape = shape,
                         colors = ButtonDefaults.buttonColors(
@@ -166,7 +169,6 @@ fun WeatherHeader(progress: Float, scrollState: ScrollState) {
                 .verticalScroll(scrollState)
                 .background(color = boxProperties.value.color("background"))
         ) {
-
             repeat(20) {
                 val bgColor = if (it == 0) Color.Red else Color.Green
                 Box(
@@ -177,7 +179,6 @@ fun WeatherHeader(progress: Float, scrollState: ScrollState) {
                         .background(color = bgColor)
                 )
             }
-
         }
     }
 }
