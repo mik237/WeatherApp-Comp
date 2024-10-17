@@ -7,7 +7,6 @@
         start: ['parent', 'start', 0],
         end: ['parent', 'end', 0],
         top: ['parent', 'top', 0],
-        alpha: 1,
         custom: {
           bottomStartPercent: 8,
           bottomEndPercent: 8
@@ -19,11 +18,20 @@
         height: 'spread',
         start: ['parent', 'start', 16],
         end: ['parent', 'end', 16],
-        top: ['parent', 'top', 400],
+        top: ['days_selection', 'bottom', 0],
         bottom: ['parent', 'bottom', 16],
         custom: {
           background: '#f1c40f'
         }
+      },
+
+      days_selection: {
+        width: 'spread',
+        height: 'wrap',
+        start: ['parent', 'start', 0],
+        end: ['parent', 'end', 0],
+        top: ['bg_image', 'bottom', 16],
+        bottom: ['box', 'top', 16],
       }
     },
 
@@ -34,7 +42,6 @@
         start: ['parent', 'start', 0],
         end: ['parent', 'end', 0],
         top: ['parent', 'top', 0],
-        alpha: 0.3,
         custom: {
           bottomStartPercent: 0,
           bottomEndPercent: 0
@@ -50,6 +57,13 @@
         custom: {
           background: '#c0392b'
         }
+      },
+      days_selection: {
+        width: 'spread',
+        height: 'wrap',
+        start: ['parent', 'start', 0],
+        end: ['parent', 'end', 0],
+        bottom: ['bg_image', 'bottom', 10],
       }
     }
   },
