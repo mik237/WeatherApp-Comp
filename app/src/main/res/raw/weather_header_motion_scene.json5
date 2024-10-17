@@ -7,16 +7,49 @@
         start: ['parent', 'start', 0],
         end: ['parent', 'end', 0],
         top: ['parent', 'top', 0],
+        alpha: 1,
+        custom: {
+          bottomStartPercent: 8,
+          bottomEndPercent: 8
+        }
+      },
+
+      box: {
+        width: 'spread',
+        height: 'spread',
+        start: ['parent', 'start', 16],
+        end: ['parent', 'end', 16],
+        top: ['parent', 'top', 400],
+        bottom: ['parent', 'bottom', 16],
+        custom: {
+          background: '#f1c40f'
+        }
       }
     },
 
     end: {
       bg_image: {
         width: 'spread',
-        height: 56,
+        height: 156,
         start: ['parent', 'start', 0],
         end: ['parent', 'end', 0],
         top: ['parent', 'top', 0],
+        alpha: 0.3,
+        custom: {
+          bottomStartPercent: 0,
+          bottomEndPercent: 0
+        }
+      },
+      box: {
+        width: 'spread',
+        height: 'spread',
+        start: ['parent', 'start', 16],
+        end: ['parent', 'end', 16],
+        top: ['parent', 'top', 156],
+        bottom: ['parent', 'bottom', 16],
+        custom: {
+          background: '#c0392b'
+        }
       }
     }
   },
@@ -25,17 +58,16 @@
     default: {
       from: 'start',
       to: 'end',
-      pathMotionArc: 'startHorizontal',
       KeyFrames: {
-        KeyAttributes: [
+        /*KeyAttributes: [
           {
             target: ['bg_image'],
-//            frames: [0, /*10,20,30,40,50,60,70,80,90,*/ 100],
+//            frames: [0, *//*10,20,30,40,50,60,70,80,90,*//* 100],
             frames: [0, 100],
             alpha: [1, 0],
-//            alpha: [1, /*.90, .80, .70, .60, .50, .40, .30, .20, .10,*/ 0],
+//            alpha: [1, *//*.90, .80, .70, .60, .50, .40, .30, .20, .10,*//* 0],
           }
-        ],
+        ],*/
       }
     }
   }
