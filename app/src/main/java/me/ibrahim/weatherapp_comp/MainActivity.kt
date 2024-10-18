@@ -94,7 +94,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
 @OptIn(ExperimentalMotionApi::class)
 @Composable
 fun WeatherHeader(progress: Float, scrollState: ScrollState) {
@@ -124,7 +123,7 @@ fun WeatherHeader(progress: Float, scrollState: ScrollState) {
         Image(
             painter = painterResource(id = R.drawable.bg_header_img),
             contentDescription = null,
-            contentScale = ContentScale.FillWidth,
+            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(
@@ -136,10 +135,12 @@ fun WeatherHeader(progress: Float, scrollState: ScrollState) {
                 .layoutId("bg_image")
         )
 
-        Box(modifier = Modifier
-            .layoutId("bgCollapsed")
-            .fillMaxWidth()
-            .background(Color(0xFFE1D3FA)))
+        Box(
+            modifier = Modifier
+                .layoutId("bgCollapsed")
+                .fillMaxWidth()
+                .background(Color(0xFFE1D3FA))
+        )
 
         Row(
             modifier = Modifier.layoutId("toolbar"),
@@ -147,19 +148,19 @@ fun WeatherHeader(progress: Float, scrollState: ScrollState) {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = "Kharkiv, Ukraine", modifier = Modifier.layoutId("txtLocation"),
+                text = "Kharkiv, Ukraine",
+                modifier = Modifier.layoutId("txtLocation"),
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Normal,
-                color = contentColor.value.color("contentColor")
+                color = contentColor.value.color("contentColor"),
             )
             IconButton(
                 onClick = { /*TODO*/ },
-                modifier = Modifier.layoutId("iconSearch")
+                modifier = Modifier.layoutId("iconSearch").size(40.dp)
             ) {
                 Icon(
                     imageVector = Icons.Default.Search, contentDescription = null,
                     tint = contentColor.value.color("contentColor"),
-                    modifier = Modifier.size(24.dp)
                 )
             }
         }
@@ -261,7 +262,7 @@ fun WeatherHeader(progress: Float, scrollState: ScrollState) {
             modifier = Modifier
                 .layoutId("box")
                 .verticalScroll(scrollState)
-                .background(color = boxProperties.value.color("background"))
+//                .background(color = boxProperties.value.color("background"))
         ) {
             repeat(20) {
                 val bgColor = if (it == 0) Color.Red else Color.Green
@@ -270,7 +271,7 @@ fun WeatherHeader(progress: Float, scrollState: ScrollState) {
                         .fillMaxWidth()
                         .height(150.dp)
                         .padding(10.dp)
-                        .background(color = bgColor)
+                        .background(color = Color(0xFFE1D3FA), shape = RoundedCornerShape(20.dp))
                 )
             }
         }

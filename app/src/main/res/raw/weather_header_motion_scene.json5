@@ -45,7 +45,7 @@
         height: 'wrap',
         start: ['parent', 'start', 16],
         end: ['parent', 'end', 16],
-        top: ['parent', 'top', 40],
+        top: ['parent', 'top', 30],
         custom: {
           contentColor: '#FFFFFFFF'
         }
@@ -131,7 +131,7 @@
         height: 'wrap',
         start: ['parent', 'start', 16],
         end: ['parent', 'end', 16],
-        top: ['parent', 'top', 40],
+        top: ['parent', 'top', 30],
         custom: {
           contentColor: '#FF000000'
         }
