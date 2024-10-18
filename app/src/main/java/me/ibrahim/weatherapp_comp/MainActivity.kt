@@ -79,6 +79,9 @@ class MainActivity : ComponentActivity() {
                                     currentScroll.toFloat() / headerHeight
                                 } else 0f
 
+                                /*val clampedScroll = currentScroll.coerceIn(0, headerHeight)
+                                val progress = clampedScroll /headerHeight.toFloat()*/
+
                                 Log.d(
                                     "derivedStateOf",
                                     "currentScroll: $currentScroll, maxScroll:$maxScroll, headerHeight:$headerHeight, progress:$progress"
