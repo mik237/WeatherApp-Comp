@@ -10,13 +10,16 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import me.ibrahim.weatherapp_comp.ui.theme.Purple80
 
 @Composable
@@ -31,7 +34,7 @@ fun WeatherFeatureDataUI(modifier: Modifier = Modifier, icon: Int, title: Int, v
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .background(color = Purple80, shape = RoundedCornerShape(16.dp))
-                .padding(12.dp)
+                .padding(horizontal = 12.dp, vertical = 8.dp)
         ) {
             val (ic, txtTitle, txtSpeed, txtRate) = createRefs()
             Image(
@@ -49,11 +52,14 @@ fun WeatherFeatureDataUI(modifier: Modifier = Modifier, icon: Int, title: Int, v
             Text(text = stringResource(id = title),
                 fontSize = 14.sp,
                 color = Color(0xff1E1B1B),
-                modifier = Modifier.constrainAs(txtTitle) {
-                    top.linkTo(parent.top)
-                    start.linkTo(ic.end, margin = 8.dp)
-                    end.linkTo(txtRate.start, 3.dp)
-                })
+                textAlign = TextAlign.Start,
+                modifier = Modifier
+                    .constrainAs(txtTitle) {
+                        top.linkTo(parent.top)
+                        start.linkTo(ic.end, margin = 5.dp)
+                        end.linkTo(txtRate.start, 3.dp)
+                        this.width = Dimension.fillToConstraints
+                    })
 
             Text(text = value,
                 fontSize = 16.sp,
