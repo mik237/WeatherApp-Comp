@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -285,10 +286,17 @@ fun WeatherHeader(progress: Float, scrollState: ScrollState) {
                 modifier = Modifier.padding(vertical = 5.dp),
                 horizontalArrangement = Arrangement.spacedBy(15.dp)
             ) {
-                WeatherFeatureDataUI(modifier = Modifier.weight(1f), R.drawable.icon_wind_speed, R.string.pressure, "720hpa", "32 hpa")
-                WeatherFeatureDataUI(modifier = Modifier.weight(1f), R.drawable.icon_wind_speed, R.string.uv_index, "2,3", "0.3")
+                WeatherFeatureDataUI(modifier = Modifier.weight(1f), R.drawable.icon_pressure, R.string.pressure, "720hpa", "32 hpa")
+                WeatherFeatureDataUI(modifier = Modifier.weight(1f), R.drawable.icon_uv_index, R.string.uv_index, "2,3", "0.3")
             }
-
+            Spacer(modifier = Modifier.height(100.dp))
+            Row(
+                modifier = Modifier.padding(vertical = 5.dp),
+                horizontalArrangement = Arrangement.spacedBy(15.dp)
+            ) {
+                WeatherFeatureDataUI(modifier = Modifier.weight(1f), R.drawable.icon_sunrise, R.string.sunrise, "4:20 AM", "4h ago")
+                WeatherFeatureDataUI(modifier = Modifier.weight(1f), R.drawable.icon_sunset, R.string.sunset, "6:50 PM", "in 9h")
+            }
 
         }
     }

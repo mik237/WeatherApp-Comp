@@ -4,4 +4,6 @@
     <string name="rain_chance">Rain Chance</string>
     <string name="pressure">Pressure</string>
     <string name="uv_index">UV Index</string>
+    <string name="sunset">Sunset</string>
+    <string name="sunrise">Sunrise</string>
 </resources>
