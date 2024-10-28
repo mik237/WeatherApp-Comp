@@ -1,25 +1,21 @@
 package me.ibrahim.weatherapp_comp.main_screen
 
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.unit.dp
 import me.ibrahim.weatherapp_comp.R
 
 @Composable
-fun DailyWeatherUI(scrollState: ScrollState) {
+fun DailyWeatherUI() {
     Column(
-        modifier = Modifier
-            .layoutId("box")
-            .verticalScroll(scrollState)
+        modifier = Modifier.wrapContentHeight()
     ) {
 
         Row(

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -18,9 +19,7 @@ import me.ibrahim.weatherapp_comp.ui.theme.Purple80
 @Composable
 fun TenDaysWeatherUI(scrollState: ScrollState) {
     Column(
-        modifier = Modifier
-            .layoutId("box")
-            .verticalScroll(scrollState)
+        modifier = Modifier.wrapContentHeight()
     ) {
         repeat(20) {
             Box(

@@ -12,8 +12,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.dp
 import me.ibrahim.weatherapp_comp.main_screen.WeatherMainUI
 import me.ibrahim.weatherapp_comp.ui.theme.WeatherAppCompTheme
 
@@ -31,29 +35,22 @@ class MainActivity : ComponentActivity() {
                             .fillMaxSize()
                     ) {
                         val scrollState = rememberScrollState()
+                        val density = LocalDensity.current
 
                         val progress by remember {
                             derivedStateOf {
                                 val currentScroll = scrollState.value
-                                val maxScroll = scrollState.maxValue
-                                val headerHeight = 400
+                                val headerHeightPx = with(density) { 400.dp.toPx() }
 
-                                val progress = if (currentScroll > headerHeight) {
+                                val progress = if (currentScroll > headerHeightPx) {
                                     1f
-                                } else if (currentScroll in 1..headerHeight) {
-                                    currentScroll.toFloat() / headerHeight
+                                } else if (currentScroll < headerHeightPx) {
+                                    currentScroll.toFloat() / headerHeightPx
                                 } else 0f
-
-                                /*val clampedScroll = currentScroll.coerceIn(0, headerHeight)
-                                val progress = clampedScroll /headerHeight.toFloat()*/
-
-                                Log.d(
-                                    "derivedStateOf",
-                                    "currentScroll: $currentScroll, maxScroll:$maxScroll, headerHeight:$headerHeight, progress:$progress"
-                                )
                                 progress
                             }
                         }
+
                         WeatherMainUI(progress = progress, scrollState)
                     }
                 }
