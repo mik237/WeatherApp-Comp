@@ -159,7 +159,9 @@ fun WeatherHeader(progress: Float, scrollState: ScrollState) {
             )
             IconButton(
                 onClick = { /*TODO*/ },
-                modifier = Modifier.layoutId("iconSearch").size(40.dp)
+                modifier = Modifier
+                    .layoutId("iconSearch")
+                    .size(40.dp)
             ) {
                 Icon(
                     imageVector = Icons.Default.Search, contentDescription = null,
