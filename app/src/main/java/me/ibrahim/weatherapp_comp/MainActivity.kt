@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -43,12 +44,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
 import androidx.constraintlayout.compose.MotionScene
+import me.ibrahim.weatherapp_comp.ui.theme.Purple80
 import me.ibrahim.weatherapp_comp.ui.theme.TextColor
 import me.ibrahim.weatherapp_comp.ui.theme.WeatherAppCompTheme
 
@@ -269,17 +273,84 @@ fun WeatherHeader(progress: Float, scrollState: ScrollState) {
                 .verticalScroll(scrollState)
 //                .background(color = boxProperties.value.color("background"))
         ) {
-            repeat(20) {
-                val bgColor = if (it == 0) Color.Red else Color.Green
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(150.dp)
-                        .padding(10.dp)
-                        .background(color = Color(0xFFE1D3FA), shape = RoundedCornerShape(20.dp))
-                )
+            Row(
+                modifier = Modifier.padding(vertical = 5.dp),
+                horizontalArrangement = Arrangement.spacedBy(15.dp)
+            ) {
+                WeatherFeatureDataUI(modifier = Modifier.weight(1f), R.drawable.icon_wind_speed, R.string.wind_speed, "12km/h", "2 km/h")
+                WeatherFeatureDataUI(modifier = Modifier.weight(1f), R.drawable.icon_rain_chance, R.string.rain_chance, "24%", "10%")
             }
+
+            Row(
+                modifier = Modifier.padding(vertical = 5.dp),
+                horizontalArrangement = Arrangement.spacedBy(15.dp)
+            ) {
+                WeatherFeatureDataUI(modifier = Modifier.weight(1f), R.drawable.icon_wind_speed, R.string.pressure, "720hpa", "32 hpa")
+                WeatherFeatureDataUI(modifier = Modifier.weight(1f), R.drawable.icon_wind_speed, R.string.uv_index, "2,3", "0.3")
+            }
+
+
         }
+    }
+}
+
+
+@Composable
+fun WeatherFeatureDataUI(modifier: Modifier = Modifier, icon: Int, title: Int, value: String, rate: String) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+    ) {
+        ConstraintLayout(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .background(color = Purple80, shape = RoundedCornerShape(16.dp))
+                .padding(12.dp)
+        ) {
+            val (ic, txtTitle, txtSpeed, txtRate) = createRefs()
+            Image(
+                painter = painterResource(id = icon),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(28.dp)
+                    .constrainAs(ic) {
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                        start.linkTo(parent.start)
+                    }
+            )
+
+            Text(text = stringResource(id = title),
+                fontSize = 14.sp,
+                color = Color(0xff1E1B1B),
+                modifier = Modifier.constrainAs(txtTitle) {
+                    top.linkTo(parent.top)
+                    start.linkTo(ic.end, margin = 8.dp)
+                    end.linkTo(txtRate.start, 3.dp)
+                })
+
+            Text(text = value,
+                fontSize = 16.sp,
+                color = Color(0xff1E1B1B),
+                modifier = Modifier.constrainAs(txtSpeed) {
+                    top.linkTo(txtTitle.bottom, margin = 5.dp)
+                    start.linkTo(txtTitle.start)
+                    bottom.linkTo(parent.bottom)
+                })
+
+
+            Text(text = rate,
+                fontSize = 11.sp,
+                color = Color(0xff000000),
+                modifier = Modifier
+                    .constrainAs(txtRate) {
+                        end.linkTo(parent.end, 8.dp)
+                        bottom.linkTo(parent.bottom)
+                    })
+        }
+
     }
 }
 

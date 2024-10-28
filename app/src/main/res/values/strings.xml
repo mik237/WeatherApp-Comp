@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">WeatherApp-Comp</string>
+    <string name="wind_speed">Wind Speed</string>
+    <string name="rain_chance">Rain Chance</string>
+    <string name="pressure">Pressure</string>
+    <string name="uv_index">UV Index</string>
 </resources>
