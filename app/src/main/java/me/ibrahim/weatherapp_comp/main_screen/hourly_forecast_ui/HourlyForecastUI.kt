@@ -1,4 +1,4 @@
-package me.ibrahim.weatherapp_comp.main_screen.hourly_ui
+package me.ibrahim.weatherapp_comp.main_screen.hourly_forecast_ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -66,33 +66,7 @@ fun HourlyForecastUI() {
     }
 }
 
-@Composable
-fun HourlyForecast(
-    time: String,
-    icon: Int,
-    temp: String
-) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        Text(
-            text = time,
-            fontSize = 13.sp,
-            color = Color.Black
-        )
-        Image(
-            painter = painterResource(id = icon),
-            contentDescription = null,
-            modifier = Modifier.size(70.dp)
-        )
-        Text(
-            text = temp,
-            fontSize = 18.sp,
-            color = Color.Black
-        )
-    }
-}
+
 
 val hourlyForecasts = listOf(
     HourlyForecastData(
