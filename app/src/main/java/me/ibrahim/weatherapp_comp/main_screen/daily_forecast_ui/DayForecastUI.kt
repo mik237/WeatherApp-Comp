@@ -10,8 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,8 +21,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.ibrahim.weatherapp_comp.R
-import me.ibrahim.weatherapp_comp.main_screen.hourly_forecast_ui.HourlyForecast
-import me.ibrahim.weatherapp_comp.main_screen.hourly_forecast_ui.hourlyForecasts
 import me.ibrahim.weatherapp_comp.ui.theme.Purple80
 
 @Composable
@@ -54,8 +50,17 @@ fun DayForecastUI() {
                     color = Color.Black
                 )
             }
-
-
+            val dataPoints = listOf(
+                DataPoint(2f, 23f),
+                DataPoint(3f, 34f),
+                DataPoint(4f, 45f),
+                DataPoint(5f, 56f),
+                DataPoint(6f, 45f),
+                DataPoint(7f, 34f),
+                DataPoint(8f, 23f),
+                DataPoint(9f, 12f),
+            )
+            LineChart(dataPoints = dataPoints)
         }
     }
 }

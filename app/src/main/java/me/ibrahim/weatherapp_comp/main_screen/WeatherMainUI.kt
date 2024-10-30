@@ -1,25 +1,18 @@
 package me.ibrahim.weatherapp_comp.main_screen
 
-import android.util.Log
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.FlingBehavior
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
@@ -28,19 +21,21 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layoutId
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
@@ -53,11 +48,59 @@ import androidx.constraintlayout.compose.MotionScene
 import me.ibrahim.weatherapp_comp.R
 import me.ibrahim.weatherapp_comp.ui.theme.TextColor
 
+
 @OptIn(ExperimentalMotionApi::class)
 @Composable
-fun WeatherMainUI(progress: Float, scrollState: ScrollState) {
+fun WeatherMainUI() {
 
+    val scrollState = rememberScrollState()
+    val density = LocalDensity.current
     val context = LocalContext.current
+
+    val maxPx = with(LocalDensity.current) { 412.dp.toPx() }
+    val minPx = with(LocalDensity.current) { 228.dp.toPx() }
+    val toolbarHeight = remember { mutableFloatStateOf(maxPx) }
+
+    val nestedScrollConnection = remember {
+        object : NestedScrollConnection {
+            override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
+                val height = toolbarHeight.floatValue;
+
+                if (height + available.y > maxPx) {
+                    toolbarHeight.floatValue = maxPx
+                    return Offset(0f, maxPx - height)
+                }
+
+                if (height + available.y < minPx) {
+                    toolbarHeight.floatValue = minPx
+                    return Offset(0f, minPx - height)
+                }
+
+                toolbarHeight.floatValue += available.y
+                return Offset(0f, available.y)
+            }
+
+        }
+    }
+
+    val progress = 1 - (toolbarHeight.floatValue - minPx) / (maxPx - minPx)
+
+    /*val progress by remember {
+        derivedStateOf {
+            val currentScroll = scrollState.value
+            val maxScroll = scrollState.maxValue
+            val headerHeightPx = with(density) { 400.dp.toPx() }
+
+            val progress = if (currentScroll > headerHeightPx) {
+                1f
+            } else if (currentScroll < headerHeightPx) {
+                currentScroll.toFloat() / headerHeightPx
+            } else 0f
+            Log.d("ScrollOffset", "currentScroll: $currentScroll, maxScroll: $maxScroll, progress: $progress, heightPx: $headerHeightPx")
+            progress
+        }
+    }*/
+
     val motionScene = remember {
         context.resources
             .openRawResource(R.raw.weather_header_motion_scene)
@@ -76,7 +119,7 @@ fun WeatherMainUI(progress: Float, scrollState: ScrollState) {
     ) {
 
 
-        val boxProperties = motionProperties(id = "box")
+
         val imgProperties = motionProperties(id = "bg_image")
         val contentColor = motionProperties(id = "toolbar")
         val txtTemperature = motionProperties(id = "txtTemperature")
@@ -219,14 +262,17 @@ fun WeatherMainUI(progress: Float, scrollState: ScrollState) {
                 }
             }
         }
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .layoutId("box")
-                .verticalScroll(scrollState)
+                .fillMaxWidth()
+                .nestedScroll(nestedScrollConnection)
         ) {
-            if (selectedIndex == 0 || selectedIndex == 1)
-                DailyWeatherUI()
-            else TenDaysWeatherUI(scrollState = scrollState)
+            item {
+                if (selectedIndex == 0 || selectedIndex == 1)
+                    DailyWeatherUI()
+                else TenDaysWeatherUI()
+            }
         }
 
     }
