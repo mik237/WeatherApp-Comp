@@ -7,4 +7,6 @@
     <string name="sunset">Sunset</string>
     <string name="sunrise">Sunrise</string>
     <string name="hourly_forecase">Hourly Forecast</string>
+    <string name="day_forecast">Day Forecast</string>
+    <string name="title_activity_collapsing_toolbar">CollapsingToolbar</string>
 </resources>
