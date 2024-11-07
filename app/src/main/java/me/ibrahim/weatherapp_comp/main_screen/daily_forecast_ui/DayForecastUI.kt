@@ -50,17 +50,17 @@ fun DayForecastUI() {
                     color = Color.Black
                 )
             }
-            val dataPoints = listOf(
-                DataPoint(2f, 23f),
-                DataPoint(3f, 34f),
-                DataPoint(4f, 45f),
-                DataPoint(5f, 56f),
-                DataPoint(6f, 45f),
-                DataPoint(7f, 34f),
-                DataPoint(8f, 23f),
-                DataPoint(9f, 12f),
-            )
-            LineChart(dataPoints = dataPoints)
+//            val dataPoints = listOf(
+//                DataPoint(2f, 23f),
+//                DataPoint(3f, 34f),
+//                DataPoint(4f, 45f),
+//                DataPoint(5f, 56f),
+//                DataPoint(6f, 45f),
+//                DataPoint(7f, 34f),
+//                DataPoint(8f, 23f),
+//                DataPoint(9f, 12f),
+//            )
+//            LineChart(dataPoints = dataPoints)
         }
     }
 }
