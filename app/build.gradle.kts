@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "me.ibrahim.weatherapp_comp"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -66,4 +66,11 @@ dependencies {
 
     implementation(libs.androidx.constraintlayout.compose)
     implementation (libs.androidx.navigation.compose)
+
+    //MPAndroidChart Library
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    //YChart Library
+    implementation ("co.yml:ycharts:2.1.0")
+
 }

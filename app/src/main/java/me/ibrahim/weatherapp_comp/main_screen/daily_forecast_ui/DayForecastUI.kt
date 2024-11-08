@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -50,17 +51,26 @@ fun DayForecastUI() {
                     color = Color.Black
                 )
             }
-            val dataPoints = listOf(
-                DataPoint(2f, 23f),
-                DataPoint(3f, 34f),
-                DataPoint(4f, 45f),
-                DataPoint(5f, 56f),
-                DataPoint(6f, 45f),
-                DataPoint(7f, 34f),
-                DataPoint(8f, 23f),
-                DataPoint(9f, 12f),
+
+
+            val temperaturePoints = listOf(
+                Point(0f, 7f), // Mon
+                Point(1f, 26f), // Tue
+                Point(2f, 35f), // Wed
+                Point(3f, 22f), // Thu
+                Point(4f, 27f), // Fri
+                Point(5f, 18f), // Sat
+                Point(6f, 24f)  // Sun
             )
-            LineChart(dataPoints = dataPoints)
+            GPTLineChart(
+                points = temperaturePoints,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
+                lineColor = Color.Black,
+                gradientColor = Color.Gray,
+                pointColor = Color.Black
+            )
         }
     }
 }
