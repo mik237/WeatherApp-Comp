@@ -153,7 +153,7 @@ fun WeatherMainUI() {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = "Kharkiv, Ukraine",
+                text = "Dubai, United Arab Emirates",
                 modifier = Modifier.layoutId("txtLocation"),
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Normal,
@@ -180,7 +180,7 @@ fun WeatherMainUI() {
         ) {
             //\u00B0
             Text(
-                text = "3°",
+                text = "33°",
                 color = contentColor.value.color("contentColor"),
                 fontSize = txtTemperature.value.int("fontSize").sp,
             )
