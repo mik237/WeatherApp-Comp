@@ -1,7 +1,7 @@
 # Weather App
 
-# Screenshots
-
+# GIF
 <img src="media/video.gif" width="33%"/>      
 
-<img src="media/screen1.png" width="23%"/>      <img src="media/screen2.png" width="23%"/>      <img src="media/screen3.png" width="23%"/>
+# Screenshots
+<img src="media/screen1.png" width="33%"/>      <img src="media/screen2.png" width="33%"/>      <img src="media/screen3.png" width="33%"/>
