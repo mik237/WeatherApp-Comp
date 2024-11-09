@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import me.ibrahim.weatherapp_comp.R
+import me.ibrahim.weatherapp_comp.main_screen.chance_of_rain_ui.ChanceOfRainUI
 import me.ibrahim.weatherapp_comp.main_screen.daily_forecast_ui.DayForecastUI
 import me.ibrahim.weatherapp_comp.main_screen.hourly_forecast_ui.HourlyForecastUI
 
@@ -37,6 +38,7 @@ fun DailyWeatherUI() {
 
         HourlyForecastUI()
         DayForecastUI()
+        ChanceOfRainUI()
         Row(
             modifier = Modifier.padding(vertical = 5.dp),
             horizontalArrangement = Arrangement.spacedBy(15.dp)
