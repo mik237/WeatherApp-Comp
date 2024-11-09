@@ -68,7 +68,7 @@ fun DayForecastUI() {
                     .fillMaxWidth()
                     .height(200.dp),
                 lineColor = Color.Black,
-                gradientColor = Color.Gray,
+                gradientColor = Color.Black,
                 pointColor = Color.Black
             )
         }
