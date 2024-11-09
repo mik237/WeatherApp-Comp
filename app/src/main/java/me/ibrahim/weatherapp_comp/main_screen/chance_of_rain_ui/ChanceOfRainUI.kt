@@ -13,9 +13,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -24,6 +31,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.CompositingStrategy
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
+import androidx.compose.ui.input.nestedscroll.NestedScrollSource
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -34,7 +44,6 @@ import me.ibrahim.weatherapp_comp.R
 import me.ibrahim.weatherapp_comp.ui.theme.Purple80
 
 
-@Preview
 @Composable
 fun ChanceOfRainUI() {
     Box(
@@ -62,76 +71,43 @@ fun ChanceOfRainUI() {
                 )
             }
 
-            RainChanceAtTime("7 PM", 80)
-            RainChanceAtTime("9 PM", 0)
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
+            ) {
+                items(rainChances, key = { it.time }) {
+                    RainChanceAtTime(time = it.time, chance = it.chance)
+                }
+            }
         }
     }
 }
 
+val rainChances = listOf(
+    /*RainChance("12 AM", 50),
+    RainChance("1 AM", 60),
+    RainChance("2 AM", 70),
+    RainChance("3 AM", 50),
+    RainChance("4 AM", 40),
+    RainChance("5 AM", 60),
+    RainChance("6 AM", 30),
+    RainChance("7 AM", 20),
+    RainChance("8 AM", 10),*/
+    RainChance("9 AM", 30),
+    RainChance("10 AM", 60),
+    RainChance("11 AM", 90),
+    RainChance("12 PM", 40),
+/*    RainChance("1 PM", 55),
+    RainChance("2 PM", 43),
+    RainChance("3 PM", 23),
+    RainChance("4 PM", 67),
+    RainChance("5 PM", 56),
+    RainChance("7 PM", 51),
+    RainChance("8 PM", 34),
+    RainChance("9 PM", 39),
+    RainChance("10 PM", 46),
+    RainChance("11 PM", 60),*/
+)
 
-@Composable
-fun RainChanceAtTime(
-    time: String, chance: Int,
-    progressColor: Color = Color(0xff8A20D5),
-    bgColor: Color = Color(0xffFAEDFF)
-) {
-    Row(
-        modifier = Modifier
-            .wrapContentHeight()
-            .fillMaxWidth()
-            .padding(horizontal = 10.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            text = time, fontSize = 15.sp,
-            color = Color.Black,
-            fontWeight = FontWeight.Normal
-        )
-        CircularProgressIndicator(modifier = Modifier.weight(1f), chance = chance, progressColor, bgColor)
-        Text(
-            text = "$chance%", fontSize = 15.sp,
-            color = Color.Black,
-            fontWeight = FontWeight.Normal
-        )
-    }
-}
-
-@Composable
-fun CircularProgressIndicator(modifier: Modifier, chance: Int, progressColor: Color, bgColor: Color) {
-    val strokeWidth = 32.dp
-    val canvasHeight = strokeWidth + 16.dp
-
-    Canvas(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(canvasHeight)
-            .padding(horizontal = 8.dp)
-            .graphicsLayer {
-                compositingStrategy = CompositingStrategy.Offscreen
-            }
-    ) {
-
-        val strokeWidthPx = strokeWidth.toPx()
-        val halfStrokeWidth = strokeWidthPx / 2f
-
-        val width = size.width
-        val yPosition = size.height / 2
-        drawLine(
-            color = bgColor,
-            start = Offset(halfStrokeWidth, yPosition),
-            end = Offset(width - halfStrokeWidth, yPosition),
-            cap = StrokeCap.Round,
-            strokeWidth = strokeWidthPx
-        )
-
-        drawLine(
-            color = if (chance == 0) bgColor else progressColor,
-            start = Offset(0f, yPosition),
-            end = Offset(width * (chance / 100f), yPosition),
-            strokeWidth = strokeWidthPx,
-            blendMode = BlendMode.SrcIn,
-            cap = StrokeCap.Round
-        )
-    }
-}
+data class RainChance(val time: String, val chance: Int)
