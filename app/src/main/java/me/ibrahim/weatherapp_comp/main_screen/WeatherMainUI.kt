@@ -120,7 +120,6 @@ fun WeatherMainUI() {
     ) {
 
 
-
         val imgProperties = motionProperties(id = "bg_image")
         val contentColor = motionProperties(id = "toolbar")
         val txtTemperature = motionProperties(id = "txtTemperature")
