@@ -3,9 +3,7 @@ package me.ibrahim.weatherapp_comp.main_screen.ten_days_ui
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import me.ibrahim.weatherapp_comp.R
@@ -15,6 +13,7 @@ fun TenDaysWeatherUI() {
     Column(
         modifier = Modifier.wrapContentHeight()
     ) {
+        MaterialTheme.shapes.medium
         tenDaysWeatherData.forEachIndexed { index, item ->
             DayWeatherForcastUI(
                 item.timestamp + (index * 86400000),
